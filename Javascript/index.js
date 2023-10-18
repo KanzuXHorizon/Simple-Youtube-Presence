@@ -28,11 +28,11 @@ setInterval(async function() {
         const author = video_obj.author;
         const author_img = document.querySelectorAll('.style-scope .ytd-video-owner-renderer .no-transition')[0].childNodes[2].src.split('=')[0];
         try {
-            console.log(video_obj,video_duration , video_duration , author_img, thumbnail , author);
+            console.log(video_obj,video_duration , timenow , author_img, thumbnail , author);
         }
         catch (e) { console.log(e) }
 
-        if (video_obj.name && video_duration && video_duration && author_img && thumbnail && author) {
+        if (video_obj.name && video_duration && timenow && author_img && thumbnail && author) {
             await fetch(`http://localhost:4400/?author=${encodeURIComponent(author)}&thumbnail=${encodeURIComponent(thumbnail)}&img=${encodeURIComponent(author_img)}&url=${encodeURIComponent(video_url)}&title=${encodeURIComponent(video_obj.name)}&time=${video_duration}&end=${timenow}`)
         }
         else {
