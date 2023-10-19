@@ -16,8 +16,25 @@
   }
   var thisinterval = "";
   var inyoureye = "";
-  const StartTime = Date.now();
-  document
+    var StartTime;
+  //document.querySelectorAll(".ytp-play-button")[0].title *pause *resume
+  setInterval(async function () {
+    const video_obj = JSON.parse(
+      document.querySelectorAll("#scriptTag")[0].innerHTML
+    );
+    if (!video_obj) {
+      return;
+    }
+    if (inyoureye == video_obj.name) {
+      return;
+    }
+    if (
+      inyoureye == "" ||
+      !video_obj.name == inyoureye ||
+      inyoureye.length != video_obj.name.length
+    ) {
+       StartTime = Date.now();
+        document
     .querySelector("#movie_player > div.html5-video-container > video")
     .addEventListener("mouseover", async function () {
       if (
@@ -56,22 +73,6 @@
         }
       }
     });
-  //document.querySelectorAll(".ytp-play-button")[0].title *pause *resume
-  setInterval(async function () {
-    const video_obj = JSON.parse(
-      document.querySelectorAll("#scriptTag")[0].innerHTML
-    );
-    if (!video_obj) {
-      return;
-    }
-    if (inyoureye == video_obj.name) {
-      return;
-    }
-    if (
-      inyoureye == "" ||
-      !video_obj.name == inyoureye ||
-      inyoureye.length != video_obj.name.length
-    ) {
       inyoureye = video_obj.name;
       try {
         const {
