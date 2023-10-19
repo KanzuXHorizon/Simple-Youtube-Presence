@@ -66,7 +66,7 @@ setInterval(async function() {
                 }
                 await send(author,thumbnail,author_img,video_url,vid_obj.name,timenow,video_duration);
                 if (document.querySelector("#simple-ad-badge\\:8") != undefined && document.querySelector("#simple-ad-badge\\:8").innerHTML.includes('tài trợ')) {
-                    global.checkAdInterval = setInterval(async function() {
+                    globalThis.checkAdInterval = setInterval(async function() {
                         if (document.querySelector("#simple-ad-badge\\:8") == undefined) {
                             clearInterval(global.checkAdInterval)
                             await new Promise((res, rej) => setTimeout(res,1000));
