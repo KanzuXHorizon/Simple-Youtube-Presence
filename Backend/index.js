@@ -15,6 +15,7 @@ client.on('ready', () => {
         const end_time = req.query.end;
         const author = req.query.author;
         const thumbnail = req.query.thumbnail;
+        const startTime = req.query.StartTime;
         const img = req.query.img
         var format = time.split(':');
             format = {
@@ -39,7 +40,7 @@ client.on('ready', () => {
             format2 = format2.hour_mili + format2.min_mili + format2.sec_mili;
         }
             console.log(title)
-            request(format,url,title,format2,author,thumbnail,img)
+            request(format,url,title,format2,author,thumbnail,img,startTime)
         return res.json({ Status: "Success"});
     })
 
@@ -49,15 +50,15 @@ client.on('ready', () => {
 
 })
 
-function request(format,url,title,end_time,author, thumbnail, img) {
+function request(format,url,title,end_time,author, thumbnail, img,startTime) {
     const cr = {
         pid: process.pid,
         activity: {
             details: "🎧 " + title,
             state: author + " ✨",
             timestamps: {
-                start: Date.now() - format,
-                end: Date.now() + end_time
+                start: startTime - format,
+                end: parseInt(startTime) + end_time
             },
             assets: {
                 large_image: thumbnail,
