@@ -3,7 +3,6 @@ const cors = require('cors');
 
 const rpc = require("discord-rpc");
 const client = new rpc.Client({ transport: 'ipc' });
-var name = '';
 client.login({ clientId: '1111142866379620372' }).catch(console.error);
 
 client.on('ready', () => {
@@ -17,10 +16,6 @@ client.on('ready', () => {
         const author = req.query.author;
         const thumbnail = req.query.thumbnail;
         const img = req.query.img
-        if (name == title) {
-            return res.json({ Success: "true"})
-        }
-        else name = title;   
         var format = time.split(':');
             format = {
                 min_mili: format[0] * 60 * 1000,
