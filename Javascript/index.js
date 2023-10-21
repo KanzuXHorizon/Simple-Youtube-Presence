@@ -34,49 +34,62 @@
 			!video_obj.name == inyoureye ||
 			inyoureye.length != video_obj.name.length
 		) {
-      update = 0
+			update = 0
 			StartTime = Date.now();
-			document
-				.querySelector("#movie_player > div.html5-video-container > video").onmouseover = async function() {
-					if (
-						!document.querySelectorAll(".ytp-play-button")[0].title.includes("Phát")
-					) {
-						if (update == 0) {
-							update = 1
-							console.log("hello");
-							const {
-								vid_obj,
-								video_duration,
-								video_url,
-								timenow,
-								thumbnail,
+			async function Update_Time() {
+				if (
+					!document.querySelectorAll(".ytp-play-button")[0].title.includes("Phát")
+				) {
+					if (update == 0) {
+						update = 1
+						console.log("hello");
+						const {
+							vid_obj,
+							video_duration,
+							video_url,
+							timenow,
+							thumbnail,
+							author,
+							author_img,
+						} = await getData();
+						if (
+							vid_obj.name &&
+							video_duration &&
+							video_duration &&
+							author_img &&
+							thumbnail &&
+							author
+						) {
+							await send(
 								author,
+								thumbnail,
 								author_img,
-							} = await getData();
-							if (
-								vid_obj.name &&
-								video_duration &&
-								video_duration &&
-								author_img &&
-								thumbnail &&
-								author
-							) {
-								await send(
-									author,
-									thumbnail,
-									author_img,
-									video_url,
-									vid_obj.name,
-									timenow,
-									video_duration
-								);
-							} else {
-								inyoureye = "";
-								console.log("số");
-							}
+								video_url,
+								vid_obj.name,
+								timenow,
+								video_duration
+							);
+						} else {
+							inyoureye = "";
+							console.log("số");
 						}
 					}
-				};
+				}
+			};
+			document.querySelector("#movie_player > div.html5-video-container > video").onmouseover = Update_Time
+			document.onkeydown = async function(event) {
+				if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+					try {
+						update = 0
+						await Update_Time();
+						console.log(event.key);
+					}
+					catch (e) {
+						console.log(e);
+					}
+				}
+			};
+
 			inyoureye = video_obj.name;
 			try {
 				const {
@@ -115,6 +128,7 @@
 								"#movie_player > div.video-ads.ytp-ad-module"
 							).childElementCount != 0
 						) {
+							console.log('1222')
 							thisinterval = setInterval(async function() {
 								if (
 									document.querySelector(
