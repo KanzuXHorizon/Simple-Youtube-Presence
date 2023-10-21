@@ -1,6 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-
 const rpc = require("discord-rpc");
 const client = new rpc.Client({ transport: 'ipc' });
 client.login({ clientId: '1111142866379620372' }).catch(console.error);
@@ -54,11 +53,11 @@ function request(format,url,title,end_time,author, thumbnail, img,startTime) {
     const cr = {
         pid: process.pid,
         activity: {
-            details: "🎧 " + title,
-            state: author + " ✨",
+            details:title,
+            state: author ,
             timestamps: {
-                start: startTime - format,
-                end: parseInt(startTime) + end_time
+                start: parseInt(startTime),
+                end: parseInt(startTime) + (end_time - format)
             },
             assets: {
                 large_image: thumbnail,
@@ -67,11 +66,11 @@ function request(format,url,title,end_time,author, thumbnail, img,startTime) {
                 small_text: author,
             },
             buttons: [{
-                    label: "🎧",
+                    label: "🎧 Chơi Trên Youtube",
                     url: url
                 },
                 {
-                    label: '🎯',
+                    label: '🎯 My Facebook',
                     url: 'https://www.facebook.com/Lazic.Kanzu/'
                 },
             ],
