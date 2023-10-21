@@ -106,38 +106,39 @@
 						timenow,
 						video_duration
 					);
-					if (
-						document.querySelector(
-							"#movie_player > div.video-ads.ytp-ad-module"
-						) != undefined &&
-						document.querySelector(
-							"#movie_player > div.video-ads.ytp-ad-module"
-						).childElementCount != 0
-					) {
-						thisinterval = setInterval(async function() {
-							if (
-								document.querySelector(
-									"#movie_player > div.video-ads.ytp-ad-module"
-								).childElementCount == 0
-							) {
-								clearInterval(thisinterval);
-								StartTime = Date.now();
-								await new Promise((res, rej) => setTimeout(res, 1000));
-								const {
-									vid_obj: a,
-									video_duration: b,
-									video_url: c,
-									timenow: d,
-									thumbnail: e,
-									author: f,
-									author_img: g,
-								} = await getData();
-								await send(f, e, g, c, a.name, d, b);
-							} else {
-								return;
-							}
-						}, 500);
-					}
+					setInterval(async function() {
+						if (
+							document.querySelector(
+								"#movie_player > div.video-ads.ytp-ad-module"
+							) != undefined &&
+							document.querySelector(
+								"#movie_player > div.video-ads.ytp-ad-module"
+							).childElementCount != 0
+						) {
+							thisinterval = setInterval(async function() {
+								if (
+									document.querySelector(
+										"#movie_player > div.video-ads.ytp-ad-module"
+									).childElementCount == 0
+								) {
+									clearInterval(thisinterval);
+									StartTime = Date.now();
+									const {
+										vid_obj: a,
+										video_duration: b,
+										video_url: c,
+										timenow: d,
+										thumbnail: e,
+										author: f,
+										author_img: g,
+									} = await getData();
+									await send(f, e, g, c, a.name, d, b);
+								} else {
+									return;
+								}
+							}, 500);
+						}
+					}, 1000)
 				} else {
 					inyoureye = "";
 					console.log("số");
