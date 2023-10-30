@@ -17,6 +17,7 @@
 	var thisinterval = "";
 	var inyoureye = "";
 	var update = 0;
+	var completed = 0;
 	var StartTime;
 	//document.querySelectorAll(".ytp-play-button")[0].title *pause *resume
 	setInterval(async function() {
@@ -89,7 +90,7 @@
 					}
 				}
 			};
-
+			
 			inyoureye = video_obj.name;
 			try {
 				const {
@@ -120,15 +121,18 @@
 						video_duration
 					);
 					setInterval(async function() {
+
 						if (
 							document.querySelector(
 								"#movie_player > div.video-ads.ytp-ad-module"
 							) != undefined &&
 							document.querySelector(
 								"#movie_player > div.video-ads.ytp-ad-module"
-							).childElementCount != 0
+							).childElementCount != 0 &&
+							completed == 0
 						) {
 							console.log('1222')
+							completed = 1;
 							thisinterval = setInterval(async function() {
 								if (
 									document.querySelector(
@@ -147,6 +151,8 @@
 										author_img: g,
 									} = await getData();
 									await send(f, e, g, c, a.name, d, b);
+									completed = 0;
+									thisinterval = ''
 								} else {
 									return;
 								}

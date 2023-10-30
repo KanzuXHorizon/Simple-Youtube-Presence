@@ -1,0 +1,15 @@
+{
+  "name": "My extension",
+  "version": "1.0.0",
+  "description": "Extension sẽ hiển thị thông báo khi khởi động web example.com",
+  "content_scripts": [
+    {
+      "matches": ["https://example.com/*"],
+      "js": ["contentscript.js"]
+    }
+  ],
+  "service_worker": {
+    "src": "serviceworker.js"
+  },
+  "manifest_version": 2
+}

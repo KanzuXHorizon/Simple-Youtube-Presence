@@ -1,0 +1,30 @@
+{
+  "name": "Horizon Youtube Presence",
+  "version": "1.0.5",
+  "manifest_version": 2,
+  "description": "simple ytb presence discord",
+  "icons": {
+      "16": "img/logo.ico",
+      "48": "img/logo.ico"
+  },
+  "browser_action": {
+      "default_popup": "index.html",
+      "default_icon": {
+          "19": "img/logo.ico",
+          "38": "img/logo.ico"
+      }
+  },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": ["https://*.youtube.com/*"],
+      "js": ["./js/Content_Script.js"]
+    }
+  ],
+  "permissions": [
+      "activeTab",
+      "https://*.youtube.com/*"
+  ],
+
+  "web_accessible_resources": ["*.html", "*.css", "*.js", "*.ico"]
+}
