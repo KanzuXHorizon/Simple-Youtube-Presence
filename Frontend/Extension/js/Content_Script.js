@@ -3,7 +3,6 @@ window.onload = async function() {
     //get - set - create session ID
     
     const snackbar = document.createElement("div");
-    const Session_ID = JSON.parse(sessionStorage.getItem('yt-remote-session-app')).creation
     snackbar.id = "snackbar";
 
     snackbar.style.left = "50%";
@@ -254,7 +253,8 @@ window.onload = async function() {
             } else console.log(112);
         }, 500);
         async function send(Author, Thumbnail, Image, Url, Title, Now, Duration) {
-            console.log(Now, Duration)
+            console.log(Now, Duration);
+            const Session_ID = JSON.parse(sessionStorage.getItem('yt-remote-session-app')).creation
             if (isDisable) return;
             else return await Ws_Server.send(
                 JSON.stringify({
