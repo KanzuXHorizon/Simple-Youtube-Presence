@@ -17,3 +17,6 @@ const endDateMillis = endDate.valueOf();
 
 console.log('Start time in milliseconds:', startDateMillis);
 console.log('End time in milliseconds:', endDateMillis);
+
+process.on('exit', function() { console.log(22)});
+throw "ERR"

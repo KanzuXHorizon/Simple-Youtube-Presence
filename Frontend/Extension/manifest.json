@@ -14,11 +14,12 @@
           "38": "img/logo.ico"
       }
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "content_scripts": [
     {
       "matches": ["https://*.youtube.com/*"],
-      "js": ["./js/Content_Script.js"]
+      "js": ["./js/Content_Script.js"],
+      "run_at": "document_idle",
+      "all_frames": false
     }
   ],
   "permissions": [
@@ -26,5 +27,5 @@
       "https://*.youtube.com/*"
   ],
 
-  "web_accessible_resources": ["*.html", "*.css", "*.js", "*.ico"]
+  "web_accessible_resources": ["./js/Content_Script.js"]
 }
