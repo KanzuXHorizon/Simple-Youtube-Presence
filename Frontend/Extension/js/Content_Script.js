@@ -31,7 +31,6 @@ window.onload = function() {
 
     let Ws_Server;
     let isDisable = false;
-    let last_href;
     var Is_Ready = false;
     var update = 0;
     var AdsProgress = false;
@@ -40,6 +39,7 @@ window.onload = function() {
     const observer = new MutationObserver(async(mutations) => {
         if (mutations[0].addedNodes.length > 0) {
             if (document.querySelector("#movie_player > div.video-ads.ytp-ad-module") != undefined && document.querySelector("#movie_player > div.video-ads.ytp-ad-module").childElementCount != 0) {
+                AdsProgress = false
                 return Notification('Đang chờ quảng cáo...');
             }
         }
@@ -245,6 +245,7 @@ window.onload = function() {
     async function send(Author, Thumbnail, Image, Url, Title, Now, Duration) {
         console.log(Now, Duration);
         const Session_ID = JSON.parse(sessionStorage.getItem('yt-remote-session-app')).creation
+        if (!Session_ID) return location.reload();
         if (isDisable) return;
         else if (Ws_Server.readyState == 0) {
             return Destroy();

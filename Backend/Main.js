@@ -32,7 +32,8 @@ void a();
 
 
 async function c() { 
-    client.login({ clientId: '1111142866379620372' }).catch(e => c());
+    console.log('Good')
+    client.login({ clientId: '1111142866379620372' }).catch(e => a());
 
     client.on('ready', () => {
         Websocket.on('connection', function(WebSocket, request) {
@@ -61,6 +62,23 @@ async function c() {
                             Session[Session_ID].Title = Title;
                             Ws_Client = Session[Session_ID];
                         }
+
+                        const All = Object.keys(Session);
+                        const List = [];
+                        //1: OPEN, 3:CLOSE
+                        for (let i of All) {
+                            if ((Session[i]).WebSocket._readyState == 1) {
+                                List.push(Session[i]);
+                            } else if ((Session[i]).WebSocket._readyState == 3) {
+                                continue;
+                            }
+                        }
+
+                        if (!List.find(i => i.Status == true)) {
+                            List[0].Status = true;
+                            Ws_Client = List[0];
+                        } 
+
                         if (Ws_Client.Status == true) {
                             Handle_Data_And_Update(Start,End,Title,Author_Name,Author_Img,Thumbnail,Url);
                         }
