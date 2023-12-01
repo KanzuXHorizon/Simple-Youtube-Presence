@@ -110,12 +110,11 @@ window.onload = function() {
                         }
                     }
                 };
-                    console.log('On Checking...')
-                    setTimeout(() => {
-                        if (Is_Ready == true) return;
-                        else Connect_To_Ws_Presence();
-                    },2500)
-    
+                console.log('On Checking...')
+                setTimeout(() => {
+                    if (Is_Ready == true) return;
+                    else Connect_To_Ws_Presence();
+                },2500)
             }
         } 
         catch (e) {
@@ -153,11 +152,11 @@ window.onload = function() {
     }
 
     async function getVideoObject() {
-        if (document.querySelectorAll("#scriptTag")[0] == undefined) { 
+        if (document.querySelectorAll("#microformat > player-microformat-renderer > script")[0] == undefined) { 
             await new Promise((r,e) => setTimeout(r, 2300));
             return getVideoObject();
         }
-        const scriptTagContent = document.querySelectorAll("#scriptTag")[0].innerHTML;
+        const scriptTagContent = document.querySelectorAll("#microformat > player-microformat-renderer > script")[0].innerHTML;
         try {
             return JSON.parse(scriptTagContent);
         } catch (e) {
@@ -189,7 +188,7 @@ window.onload = function() {
         let video_obj = await getVideoObject();
         if (video_obj == '') video_obj = await getVideoObject();
         //check (next video)
-        observer.observe(document.querySelector("#scriptTag"), {
+        observer.observe(document.querySelector("#microformat > player-microformat-renderer > script"), {
             attributes: true
         });
 
