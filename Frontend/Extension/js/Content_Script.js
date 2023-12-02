@@ -188,8 +188,8 @@ window.onload = function() {
         let video_obj = await getVideoObject();
         if (video_obj == '') video_obj = await getVideoObject();
         //check (next video)
-        observer.observe(document.querySelector("#microformat > player-microformat-renderer > script"), {
-            attributes: true
+        observer.observe(document.querySelector("#microformat > player-microformat-renderer"), {
+            childList: true
         });
 
         //Ads check
