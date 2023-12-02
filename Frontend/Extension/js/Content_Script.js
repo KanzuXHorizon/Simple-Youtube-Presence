@@ -53,7 +53,7 @@ window.onload = function() {
             }
         }
 
-        if (mutations[0].type == 'attributes' && mutations[0].target.id == 'scriptTag') {
+        if (mutations[0].type == 'attributes') {
             //only 1 time
             return Start_Crawl_Data();
         }
@@ -189,7 +189,7 @@ window.onload = function() {
         if (video_obj == '') video_obj = await getVideoObject();
         //check (next video)
         observer.observe(document.querySelector("#microformat > player-microformat-renderer"), {
-            childList: true
+            attributes: true
         });
 
         //Ads check
